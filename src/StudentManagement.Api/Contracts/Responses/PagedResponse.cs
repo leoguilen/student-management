@@ -4,12 +4,21 @@
 /// Represents a paged response.
 /// </summary>
 /// <typeparam name="T">The type of the items in the response.</typeparam>
-public abstract record PagedResponse<T>
+public record PagedResponse<T>
 {
+    public PagedResponse(IEnumerable<T> items, int totalItems, int page, int pageSize)
+    {
+        Items = items;
+        TotalItems = totalItems;
+        Page = page;
+        PageSize = pageSize;
+        TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+    }
+
     /// <summary>
     /// The items in the response.
     /// </summary>
-    public required IEnumerable<T> Items { get; init; }
+    public IEnumerable<T> Items { get; init; }
     
     /// <summary>
     /// The current page.

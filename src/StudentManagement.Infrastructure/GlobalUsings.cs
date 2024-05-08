@@ -2,8 +2,10 @@
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using System.Data;
-global using StudentManagement.Core;
 global using StudentManagement.Core.Repositories;
 global using System.Linq.Expressions;
 global using Microsoft.Extensions.DependencyInjection;
-global using Microsoft.Extensions.Configuration;
+global using System.Reflection;
+global using StudentManagement.Infrastructure.Data.Contexts;
+global using StudentManagement.Infrastructure.Data.Repositories;
+global using StudentManagement.Core.Models;

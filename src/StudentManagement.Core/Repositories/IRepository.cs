@@ -2,7 +2,7 @@
 
 public interface IRepository<TEntity> where TEntity : class
 {
-    Task<IQueryable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
+    Task<IQueryable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
 
     Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 

@@ -6,5 +6,5 @@ public class Subject
     
     public required string Name { get; init; }
     
-    public List<Grade> Grades { get; init; } = [];
+    public ICollection<Grade> Grades { get; init; } = [];
 }

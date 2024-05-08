@@ -1,8 +1,6 @@
-﻿using System.Reflection;
+﻿namespace StudentManagement.Infrastructure.Data.Contexts;
 
-namespace StudentManagement.Infrastructure.Data.Contexts;
-
-internal sealed class AppDbContext(DbContextOptions options) : DbContext(options)
+internal sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Student> Students { get; set; }
     

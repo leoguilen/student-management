@@ -8,17 +8,51 @@ public static class ServiceCollectionExtensions
             .AddControllers()
             .Services
             .AddEndpointsApiExplorer()
+            .AddProblemDetails()
             .AddHttpContextAccessor()
-            .AddMemoryCache();
+            .AddMemoryCache()
+            .AddExceptionHandler<GlobalExceptionHandlerMiddleware>();
     }
 
-    public static IServiceCollection AddAuthServices(this IServiceCollection services)
+    public static IServiceCollection AddOptions(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        return services
+            .Configure<JwtOptions>(configuration.GetRequiredSection("Authentication:Jwt"));
+    }
+
+    public static IServiceCollection AddAuthServices(
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
         return services
             .AddAuthorization()
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer()
-                .Services;
+                .AddJwtBearer(options =>
+                {
+                    var jwtOptions = configuration.GetRequiredSection("Authentication:Jwt");
+                    var issuerSigningKeys = jwtOptions
+                        .GetRequiredSection("IssuerSigningKeys").Get<string[]>()!
+                        .Select(key => new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)))
+                        .ToArray();
+                    
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuers = jwtOptions.GetRequiredSection("ValidIssuers").Get<string[]>(),
+                        ValidateAudience = true,
+                        ValidAudiences = jwtOptions.GetRequiredSection("ValidAudiences").Get<string[]>(),
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKeys = issuerSigningKeys,
+                        RequireExpirationTime = true,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero,
+                    };
+                })
+                .Services
+            .AddSingleton<ITokenService, TokenService>();
     }
 
     public static IServiceCollection AddSwagger(this IServiceCollection services)

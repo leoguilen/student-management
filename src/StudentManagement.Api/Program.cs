@@ -1,7 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDefaultServices();
-builder.Services.AddAuthServices();
+builder.Services.AddAuthServices(builder.Configuration);
+builder.Services.AddOptions(builder.Configuration);
+builder.Services.AddCore();
+builder.Services.AddInfrastructure();
 builder.Services.AddSwagger();
 
 var app = builder.Build();
@@ -13,6 +16,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+app.UseExceptionHandler();
 app.UseAuthentication();
 app.UseAuthentication();
 app.MapControllers();
