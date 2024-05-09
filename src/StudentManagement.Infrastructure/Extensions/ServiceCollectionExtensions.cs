@@ -10,8 +10,8 @@ public static class ServiceCollectionExtensions
         });
 
         services.AddScoped<IStudentRepository, StudentRepository>();
-        // services.AddScoped<ISubjectRepository, SubjectRepository>();
-        // services.AddScoped<IGradeRepository, GradeRepository>();
+        services.AddScoped<ISubjectRepository, SubjectRepository>();
+        services.AddScoped<IGradeRepository, GradeRepository>();
         
         return services;
     }

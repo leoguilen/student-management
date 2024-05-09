@@ -27,7 +27,14 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration)
     {
         return services
-            .AddAuthorization()
+            .AddAuthorization(options => {
+                options.AddPolicy("StudentIdPolicy", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireRole("Student");
+                    policy.Requirements.Add(new StudentIdRequirement());
+                });
+            })
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -52,6 +59,7 @@ public static class ServiceCollectionExtensions
                     };
                 })
                 .Services
+            .AddScoped<IAuthorizationHandler, StudentIdHandler>()
             .AddSingleton<ITokenService, TokenService>();
     }
 

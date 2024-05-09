@@ -15,7 +15,8 @@ public record StudentQueryParams
     /// The date of birth of the student.
     /// </summary>
     /// <example>2000-01-01</example>
-    public DateOnly? DateOfBirth { get; init; }
+    [DataType(DataType.Date)]
+    public DateTime? DateOfBirth { get; init; }
 
     /// <summary>
     /// The CPF of the student
@@ -25,6 +26,6 @@ public record StudentQueryParams
 
     public static implicit operator StudentFilter(StudentQueryParams studentQueryParams) => new(
         studentQueryParams.Name,
-        studentQueryParams.DateOfBirth,
+        studentQueryParams.DateOfBirth.HasValue ? DateOnly.FromDateTime(studentQueryParams.DateOfBirth.Value) : null,
         studentQueryParams.Cpf);
 }

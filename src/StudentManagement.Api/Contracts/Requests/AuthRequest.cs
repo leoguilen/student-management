@@ -9,6 +9,5 @@ public record AuthRequest
     /// The identifier of the student.
     /// </summary>
     /// <example>12345678-1234-1234-1234-123456789012</example>
-    [Required(ErrorMessage = "The student ID is required.")]
-    public Guid StudentId { get; init; }
+    public Guid? StudentId { get; init; }
 }

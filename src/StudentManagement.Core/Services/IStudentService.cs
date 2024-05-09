@@ -14,4 +14,6 @@ public interface IStudentService
     Task<StudentDto?> UpdateAsync(Guid id, StudentDto student, CancellationToken cancellationToken = default);
 
     Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
+
+    Task<StudentGradeDto?> GetStudentGradesAsync(Guid id, CancellationToken cancellationToken = default);
 }

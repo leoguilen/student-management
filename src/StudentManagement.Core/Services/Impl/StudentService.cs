@@ -41,6 +41,23 @@ internal sealed class StudentService(IStudentRepository studentRepository) : ISt
             : (StudentDto)student;
     }
 
+    public async Task<StudentGradeDto?> GetStudentGradesAsync(
+        Guid id,
+        CancellationToken cancellationToken = default)
+    {
+        var student = await studentRepository.GetByIdAsync(id, cancellationToken);
+        if (student is null)
+        {
+            return null;
+        }
+
+        return new StudentGradeDto
+        {
+            Student = (StudentDto)student!,
+            Grades = student!.Grades.Select(g => (GradeDto)g)
+        };
+    }
+
     public async Task<StudentDto?> UpdateAsync(
         Guid id,
         StudentDto student,

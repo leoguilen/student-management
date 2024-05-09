@@ -3,8 +3,7 @@
 [ApiController]
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/[controller]")]
-public class StudentsController(IStudentService studentService)
-    : ControllerBase
+public class StudentsController(IStudentService studentService) : ControllerBase
 {
     /// <summary>Get a list of students</summary>
     /// <remarks>Endpoint to get a list of students. It's possible to filter the students by any property.</remarks>
@@ -55,7 +54,9 @@ public class StudentsController(IStudentService studentService)
     [ProducesResponseType(typeof(StudentResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(HttpValidationProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetByIdAsync(
+        [FromRoute] Guid id,
+        CancellationToken cancellationToken = default)
     {
         var student = await studentService.GetByIdAsync(id, cancellationToken);
         return student is null
@@ -148,4 +149,30 @@ public class StudentsController(IStudentService studentService)
         => await studentService.DeleteAsync(id, cancellationToken)
             ? NoContent()
             : NotFound();
+
+    /// <summary>Get a list of grades of a student</summary>
+    /// <remarks>Endpoint to get a list of grades of a student.</remarks>
+    /// <param name="id" example="12345678-1234-1234-1234-123456789012">The ID of the student</param>
+    /// <param name="cancellationToken">The cancellation token</param>
+    /// <returns>A list of grades of a student</returns>
+    /// <response code="200">Returns the list of grades of a student</response>
+    /// <response code="401">User is not authenticated</response>
+    /// <response code="403">User is not authorized</response>
+    /// <response code="404">Not found</response>
+    /// <response code="500">Internal server error</response>
+    [HttpGet("{id:guid:required}/grades", Name = "GetStudentGrades")]
+    [Authorize(Policy = "StudentIdPolicy")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(typeof(StudentGradesResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(HttpValidationProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetStudentGradesAsync(
+        [FromRoute] Guid id,
+        CancellationToken cancellationToken = default)
+    {
+        var studentGrades = await studentService.GetStudentGradesAsync(id, cancellationToken);
+        return studentGrades is null
+            ? NotFound()
+            : Ok(StudentGradesResponse.From(studentGrades));
+    }
 }

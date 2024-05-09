@@ -37,7 +37,7 @@ public class AuthController(
                 return BadRequest(ModelState);
             }
 
-            student = await studentRepository.GetByIdAsync(request.StudentId, cancellationToken);
+            student = await studentRepository.GetByIdAsync(request.StudentId!.Value, cancellationToken);
             if (student is null)
             {
                 logger.LogWarning("Failed to generate an authentication token for student {StudentId}", request.StudentId);

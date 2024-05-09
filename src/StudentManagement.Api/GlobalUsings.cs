@@ -26,3 +26,6 @@ global using StudentManagement.Api.Options;
 global using Microsoft.AspNetCore.Mvc.ModelBinding;
 global using StudentManagement.Api.Contracts.QueryParams;
 global using StudentManagement.Core.Models;
+global using StudentManagement.Api.Authorization.Requirements;
+global using StudentManagement.Api.Authorization.Handlers;
+global using System.Text.Json.Serialization;

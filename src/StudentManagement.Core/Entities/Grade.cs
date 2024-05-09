@@ -2,15 +2,20 @@ namespace StudentManagement.Core.Entities;
 
 public class Grade
 {
-    public Guid Id { get; init; }
+    public Guid Id { get; set; }
     
-    public Guid StudentId { get; init; }
+    public Guid StudentId { get; set; }
     
-    public Guid SubjectId { get; init; }
+    public Guid SubjectId { get; set; }
     
-    public int Value { get; init; }
+    public int Value { get; set; }
 
-    public Student? Student { get; init; }
+    public Student? Student { get; set; }
 
-    public Subject? Subject { get; init; }
+    public Subject? Subject { get; set; }
+
+    internal void Update(GradeDto grade)
+    {
+        Value = grade.Value;
+    }
 }

@@ -25,8 +25,22 @@ internal sealed class StudentRepository(AppDbContext context) : IStudentReposito
         return await context.SaveChangesAsync(cancellationToken);
     }
 
-    public Task<IQueryable<Student>> GetAllAsync(CancellationToken cancellationToken = default)
-        => Task.FromResult(context.Students.AsNoTracking());
+    public Task<IQueryable<Student>> GetAllAsync(
+        Expression<Func<Student, bool>>? predicate = null,
+        CancellationToken cancellationToken = default)
+    {
+        var students = context.Students.AsNoTracking();
+        if (predicate is not null)
+        {
+            students = students.Where(predicate);
+        }
+
+        students = students
+            .Include(s => s.Grades)
+            .ThenInclude(g => g.Subject);
+            
+        return Task.FromResult(students);
+    }
 
     public async Task<(IEnumerable<Student> Students, int TotalStudents)> GetAllPaginatedAsync(
         StudentFilter studentFilter,
@@ -57,18 +71,11 @@ internal sealed class StudentRepository(AppDbContext context) : IStudentReposito
     public async Task<Student?> GetByIdAsync(
         Guid id,
         CancellationToken cancellationToken = default)
-        => await context.Students.FindAsync([id], cancellationToken);
-
-    public async Task<(IQueryable<Student>, int)> GetPagedAsync(
-        Expression<Func<Student, bool>> predicate,
-        int page,
-        int size,
-        CancellationToken cancellationToken = default)
-    {
-        var students = context.Students.AsNoTracking().Where(predicate);
-        var totalStudents = await students.CountAsync(cancellationToken);
-        return (students.Skip((page - 1) * size).Take(size), totalStudents);
-    }
+        => await context.Students
+            .AsNoTracking()
+            .Include(s => s.Grades)
+            .ThenInclude(g => g.Subject)
+            .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
 
     public async Task<Student> UpdateAsync(
         Student entity,
