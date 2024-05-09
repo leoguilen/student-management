@@ -7,7 +7,7 @@ public class AuthEndpointsTest(
     : IntegrationTest(factory, outputHelper)
 {
     [Fact]
-    public async Task GenerateAuthTokenAsync_WhenRequestIsNull_ReturnsSuccessResponse()
+    public async Task Post_WhenRequestIsNull_ReturnsSuccessResponse()
     {
         // Arrange
         var request = (AuthRequest?)null;
@@ -22,7 +22,7 @@ public class AuthEndpointsTest(
     }
 
     [Fact]
-    public async Task GenerateAuthTokenAsync_WhenRequestIsNotNull_ReturnsSuccessResponse()
+    public async Task Post_WhenRequestIsNotNull_ReturnsSuccessResponse()
     {
         // Arrange
         var studentId = await AddStudentInDatabaseAsync();
@@ -38,7 +38,7 @@ public class AuthEndpointsTest(
     }
 
     [Fact]
-    public async Task GenerateAuthTokenAsync_WhenRequestContainsInvalidStudentId_ReturnsUnauthorized()
+    public async Task Post_WhenRequestContainsInvalidStudentId_ReturnsUnauthorized()
     {
         // Arrange
         var request = new AuthRequest { StudentId = Guid.NewGuid() };

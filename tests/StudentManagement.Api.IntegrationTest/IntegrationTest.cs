@@ -1,27 +1,25 @@
 ﻿namespace StudentManagement.Api.IntegrationTest;
 
-public abstract class IntegrationTest : IClassFixture<CustomWebApplicationFactory>
+public abstract class IntegrationTest(
+    CustomWebApplicationFactory factory,
+    ITestOutputHelper outputHelper)
+    : IClassFixture<CustomWebApplicationFactory>
 {
-    protected static readonly StudentFixture StudentFixture = new();
+    private static string _accessToken = string.Empty;
 
-    protected CustomWebApplicationFactory Factory { get; }
+    protected readonly StudentFixture StudentFixture = new();
     
-    protected HttpClient Client { get; }
+    protected readonly StudentRequestFixture StudentRequestFixture = new();
 
-    protected ITestOutputHelper Logger { get; }
+    protected CustomWebApplicationFactory Factory { get; } = factory;
 
-    protected IntegrationTest(
-        CustomWebApplicationFactory factory,
-        ITestOutputHelper outputHelper)
+    protected HttpClient Client { get; } = factory.CreateClient();
+
+    protected ITestOutputHelper Logger { get; } = outputHelper;
+
+    protected async Task AuthenticateAsync(Guid? studentId = null)
     {
-        Factory = factory;
-        Client = factory.CreateClient();
-        Logger = outputHelper;
-    }
-
-    protected async Task AuthenticateAsync()
-    {
-        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync());
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await GetAccessTokenAsync(Client, studentId));
     }
 
     protected async Task<Guid> AddStudentInDatabaseAsync()
@@ -33,8 +31,17 @@ public abstract class IntegrationTest : IClassFixture<CustomWebApplicationFactor
         return entry.Entity.Id;
     }
 
-    private static async Task<string> GetAccessTokenAsync()
+    private static async Task<string> GetAccessTokenAsync(HttpClient client, Guid? studentId = null)
     {
-        return await Task.FromResult("jwt");
+        if (!string.IsNullOrEmpty(_accessToken) && !studentId.HasValue)
+        {
+            return _accessToken;
+        }
+
+        var request = studentId.HasValue ? new AuthRequest { StudentId = studentId } : null;
+        var response = await client.PostAsJsonAsync("/api/auth/token", request);
+        var authResponse = await response.Content.ReadFromJsonAsync<AuthResponse>();
+        _accessToken = authResponse!.AccessToken;
+        return _accessToken;
     }
 }
