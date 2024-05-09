@@ -1,0 +1,499 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Student Management Api",
+    "collectionId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+    "dateExported": "2024-05-09T13:04:54.590Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "13dbc549-ee8a-49e5-a018-95a6f3cb1b7c",
+            "name": "Auth",
+            "containerId": "",
+            "created": "2024-05-08T16:58:16.708Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "be1bda0b-e0a7-485d-90eb-4294ab520d59",
+            "name": "Students",
+            "containerId": "",
+            "created": "2024-05-08T17:01:14.131Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "2c9cfffe-e8d9-4e22-a0dd-84c02261d697",
+            "name": "Subjects",
+            "containerId": "",
+            "created": "2024-05-08T21:47:23.127Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "da8e6d61-07ae-42c2-ac4a-07534c6a5cfc",
+            "name": "Grades",
+            "containerId": "",
+            "created": "2024-05-08T22:26:54.284Z",
+            "sortNum": 40000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "f7413c32-b5f6-44f7-8662-d0712f29d5ea",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "13dbc549-ee8a-49e5-a018-95a6f3cb1b7c",
+            "name": "Generate Auth Token",
+            "url": "{{BASE_URL}}/api/auth/token",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-08T16:58:27.381Z",
+            "modified": "2024-05-08T23:54:10.374Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"studentId\": \"96aec6a3-3de3-40cd-a0a6-85ece737d828\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "f9069eb0-51c6-4a25-85b3-fbecd41ab713",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "be1bda0b-e0a7-485d-90eb-4294ab520d59",
+            "name": "Get By Id",
+            "url": "{{BASE_URL}}/api/students/78c7549b-de6f-4f6c-b178-a3add4e6e7bd",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-08T17:01:35.802Z",
+            "modified": "2024-05-08T23:12:45.619Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "7ecf913a-80e4-453d-9c0a-75bbae7c5746",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "2c9cfffe-e8d9-4e22-a0dd-84c02261d697",
+            "name": "Get By Id",
+            "url": "{{BASE_URL}}/api/subjects/e69f2580-10a5-433a-a7fc-7ff608a3d302",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-08T21:47:23.127Z",
+            "modified": "2024-05-08T21:49:24.849Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "73565823-562d-4405-b228-2f7fde68ce34",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "be1bda0b-e0a7-485d-90eb-4294ab520d59",
+            "name": "Delete",
+            "url": "{{BASE_URL}}/api/students/67a041dc-3b8d-4d76-a658-486d52f4bd26",
+            "method": "DELETE",
+            "sortNum": 25000,
+            "created": "2024-05-08T21:03:33.702Z",
+            "modified": "2024-05-08T21:07:43.176Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "8e447ca0-e72c-4a4a-b15f-5334670b94ce",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "2c9cfffe-e8d9-4e22-a0dd-84c02261d697",
+            "name": "Delete",
+            "url": "{{BASE_URL}}/api/subjects/67a041dc-3b8d-4d76-a658-486d52f4bd26",
+            "method": "DELETE",
+            "sortNum": 25000,
+            "created": "2024-05-08T21:47:23.128Z",
+            "modified": "2024-05-08T21:47:44.055Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "ab6e896b-ec2a-43f4-adf5-f76aba027e0e",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "da8e6d61-07ae-42c2-ac4a-07534c6a5cfc",
+            "name": "Delete",
+            "url": "{{BASE_URL}}/api/grades/67a041dc-3b8d-4d76-a658-486d52f4bd26",
+            "method": "DELETE",
+            "sortNum": 25000,
+            "created": "2024-05-08T22:26:54.285Z",
+            "modified": "2024-05-08T22:27:14.982Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "0303c152-c547-4d5f-a0be-105f7a90d7e1",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "be1bda0b-e0a7-485d-90eb-4294ab520d59",
+            "name": "Create",
+            "url": "{{BASE_URL}}/api/students",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-08T20:39:07.360Z",
+            "modified": "2024-05-08T21:05:00.113Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"John Doe\",\n  \"dateOfBirth\": \"2000-01-01\",\n  \"cpf\": \"123.456.789-00\",\n  \"address\": \"123 Main St, Springfield, IL 62701\",\n  \"phoneNumber\": \"(55) 5555-5555\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            }
+        },
+        {
+            "_id": "2a827063-f987-4f31-b2c3-0082bf2ef7ef",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "be1bda0b-e0a7-485d-90eb-4294ab520d59",
+            "name": "Get all",
+            "url": "{{BASE_URL}}/api/students",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-05-08T20:59:59.330Z",
+            "modified": "2024-05-08T22:49:34.871Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "dateOfBirth",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "cpf",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "3",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "size",
+                    "value": "10",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "orderBy",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "c74ee665-34b1-4d8e-861e-0cb923d30ded",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "2c9cfffe-e8d9-4e22-a0dd-84c02261d697",
+            "name": "Create",
+            "url": "{{BASE_URL}}/api/subjects",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-08T21:47:23.129Z",
+            "modified": "2024-05-08T21:47:58.439Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Math\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            }
+        },
+        {
+            "_id": "5110b476-751c-4112-85d2-fbeb3012080c",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "2c9cfffe-e8d9-4e22-a0dd-84c02261d697",
+            "name": "Get all",
+            "url": "{{BASE_URL}}/api/subjects",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-05-08T21:47:23.130Z",
+            "modified": "2024-05-08T21:50:33.091Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "Math",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "3",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "size",
+                    "value": "10",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "orderBy",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "ef80d656-e46a-4f09-9c6a-d096ee250325",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "da8e6d61-07ae-42c2-ac4a-07534c6a5cfc",
+            "name": "Create",
+            "url": "{{BASE_URL}}/api/grades",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-08T22:26:54.288Z",
+            "modified": "2024-05-08T23:54:50.402Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"studentId\": \"96aec6a3-3de3-40cd-a0a6-85ece737d828\",\n  \"subjectId\": \"78acf8e2-2caa-4a57-b198-a97875fda510\",\n  \"value\": 8\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            }
+        },
+        {
+            "_id": "e8748f59-a117-44dc-9eda-3ac39622ce14",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "be1bda0b-e0a7-485d-90eb-4294ab520d59",
+            "name": "Get all student grades",
+            "url": "{{BASE_URL}}/api/students/96aec6a3-3de3-40cd-a0a6-85ece737d828/grades",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-05-08T22:29:17.295Z",
+            "modified": "2024-05-08T23:54:30.993Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "f5bacd76-238a-449a-8907-762224063f9c",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "be1bda0b-e0a7-485d-90eb-4294ab520d59",
+            "name": "Update",
+            "url": "{{BASE_URL}}/api/students/67a041dc-3b8d-4d76-a658-486d52f4bd26",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-05-08T21:01:49.941Z",
+            "modified": "2024-05-08T21:07:26.474Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"John Doe (updated)\",\n  \"dateOfBirth\": \"1999-06-29\",\n  \"cpf\": \"123.456.789-00\",\n  \"address\": \"123 Main St, Springfield, IL 62701 (updated)\",\n  \"phoneNumber\": \"(55) 5555-5555\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            }
+        },
+        {
+            "_id": "c3665039-1a4b-45d5-9d61-eec6d5856bf4",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "2c9cfffe-e8d9-4e22-a0dd-84c02261d697",
+            "name": "Update",
+            "url": "{{BASE_URL}}/api/subjects/e69f2580-10a5-433a-a7fc-7ff608a3d302",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-05-08T21:47:23.131Z",
+            "modified": "2024-05-08T21:49:44.128Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"English\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            }
+        },
+        {
+            "_id": "776a40a8-1fd4-4702-ba0e-cc742083559f",
+            "colId": "e45e5053-0faa-4ffa-a518-41dde72cb9ed",
+            "containerId": "da8e6d61-07ae-42c2-ac4a-07534c6a5cfc",
+            "name": "Update",
+            "url": "{{BASE_URL}}/api/grades/e69f2580-10a5-433a-a7fc-7ff608a3d302",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2024-05-08T22:26:54.290Z",
+            "modified": "2024-05-08T22:27:39.248Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"studentId\": \"12345678-1234-1234-1234-123456789012\",\n  \"subjectId\": \"12345678-1234-1234-1234-123456789012\",\n  \"value\": 10\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "token"
+            }
+        }
+    ],
+    "ref": "xxnWqldOhlisGKxdjNAtn7WJ1-I6mElKRCJTlsB5uEjmnxovWT6gujjhUhBS-CwSwc_3rjt2hICXPndnEdaEoQ"
+}
