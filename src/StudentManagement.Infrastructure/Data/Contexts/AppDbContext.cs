@@ -1,6 +1,6 @@
 ﻿namespace StudentManagement.Infrastructure.Data.Contexts;
 
-internal sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Student> Students { get; set; }
     
