@@ -3,5 +3,9 @@
 [Trait("Category", "Unit")]
 public class SubjectsControllerTest
 {
-
+    [Fact]
+    public void Test()
+    {
+        Assert.True(true);
+    }
 }
